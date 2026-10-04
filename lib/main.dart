@@ -37,6 +37,20 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
+  Widget checkStatus() {
+    if (isStatusKerja == true) {
+      return Text(
+        "Status Kerja Aktif",
+        style: TextStyle(fontSize: 13, color: Colors.grey),
+      );
+    } else {
+      return Text(
+        "Status Kerja Tidak Aktif",
+        style: TextStyle(fontSize: 13, color: Colors.grey),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,10 +92,7 @@ class _HomePageState extends State<HomePage>
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            Text(
-              "Status Kerja: Aktif",
-              style: TextStyle(fontSize: 15, color: Colors.grey),
-            ),
+            checkStatus(),
           ],
         ),
         actions: [
@@ -252,9 +263,10 @@ class _HomePageState extends State<HomePage>
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: [
+                    // Switch Status Kerja
                     ListTile(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                      title: Text(
+                      title: const Text(
                         "Status Kerja",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -265,49 +277,46 @@ class _HomePageState extends State<HomePage>
                           onChanged: (bool value) {
                             setState(() {
                               isStatusKerja = value;
+                              // Jika status kerja OFF, otomatis matikan terima otomatis
+                              if (isStatusKerja) {
+                                isTerimaOtomatis = true;
+                              }
                             });
                           },
-                          // Warna bulatan (thumb) saat aktif
-                          activeColor: const Color(
-                            0xFF00B092,
-                          ), // Warna teal/hijau toska
-                          // Warna jalur/jalur belakang (track) saat aktif
+                          activeColor: const Color(0xFF00B092),
                           activeTrackColor: const Color(0xFF00B092)
                               .withOpacity(0.4),
-                          // Warna saat non-aktif (opsional)
                           inactiveThumbColor: Colors.grey[400],
                           inactiveTrackColor: Colors.grey[200],
                         ),
                       ),
                     ),
-                    ListTile(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-                      title: Text(
-                        "Terima Otomatis",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      trailing: Transform.scale(
-                        scale: 0.85,
-                        child: Switch(
-                          value: isTerimaOtomatis,
-                          onChanged: (bool value) {
-                            setState(() {
-                              isTerimaOtomatis = value;
-                            });
-                          },
-                          // Warna bulatan (thumb) saat aktif
-                          activeColor: const Color(
-                            0xFF00B092,
-                          ), // Warna teal/hijau toska
-                          // Warna jalur/jalur belakang (track) saat aktif
-                          activeTrackColor: const Color(0xFF00B092)
-                              .withOpacity(0.4),
-                          // Warna saat non-aktif (opsional)
-                          inactiveThumbColor: Colors.grey[400],
-                          inactiveTrackColor: Colors.grey[200],
+                    if (isStatusKerja)
+                      ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                        ),
+                        title: const Text(
+                          "Terima Otomatis",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        trailing: Transform.scale(
+                          scale: 0.85,
+                          child: Switch(
+                            value: isTerimaOtomatis,
+                            onChanged: (bool value) {
+                              setState(() {
+                                isTerimaOtomatis = value;
+                              });
+                            },
+                            activeColor: const Color(0xFF00B092),
+                            activeTrackColor: const Color(0xFF00B092)
+                                .withOpacity(0.4),
+                            inactiveThumbColor: Colors.grey[400],
+                            inactiveTrackColor: Colors.grey[200],
+                          ),
                         ),
                       ),
-                    ),
                     ListTile(
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                       title: Text(
