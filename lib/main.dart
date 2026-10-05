@@ -23,8 +23,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  bool isStatusKerja = true;
-  bool isTerimaOtomatis = true;
+  bool isStatusKerja = false;
+  bool isTerimaOtomatis = false;
 
   @override
   void initState() {
@@ -41,12 +41,12 @@ class _HomePageState extends State<HomePage>
     if (isStatusKerja == true) {
       return Text(
         "Status Kerja Aktif",
-        style: TextStyle(fontSize: 13, color: Colors.grey),
+        style: TextStyle(fontSize: 10, color: Colors.grey),
       );
     } else {
       return Text(
         "Status Kerja Tidak Aktif",
-        style: TextStyle(fontSize: 13, color: Colors.grey),
+        style: TextStyle(fontSize: 10, color: Colors.grey),
       );
     }
   }
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage>
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.transparent,
         toolbarHeight: 70,
-        leadingWidth: 80,
+        leadingWidth: 70,
         titleSpacing: 0,
         leading: Builder(
           builder: (context) {
@@ -84,12 +84,12 @@ class _HomePageState extends State<HomePage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 160,
+              width: 130,
               child: Text(
                 "KEVIN HERLAMBANG",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
             checkStatus(),
