@@ -1,3 +1,5 @@
+import 'package:duplicate_spd/pages/hub.dart';
+import 'package:duplicate_spd/pages/pesanan_searah.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -318,6 +320,11 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                     ListTile(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => PesananSearah(),
+                        ),
+                      ),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                       title: Text(
                         "Pesanan Searah",
@@ -326,6 +333,7 @@ class _HomePageState extends State<HomePage>
                       trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     ),
                     ListTile(
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => Hub())),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                       title: Text(
                         "Hub",
