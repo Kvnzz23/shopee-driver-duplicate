@@ -6,14 +6,17 @@ class PesananSearah extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           "Pesanan Searah",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
-        surfaceTintColor: Colors.transparent,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(color: Colors.grey[200], height: 1.0),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(20),
@@ -40,7 +43,7 @@ class PesananSearah extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 45),
               child: SizedBox(
                 height: 45,
                 child: SearchBar(
@@ -62,6 +65,56 @@ class PesananSearah extends StatelessWidget {
                     print("Teks yang diketik: $value");
                   },
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 25),
+              child: Text(
+                "Riwayat Tujuan Pesanan Searah",
+                style: TextStyle(color: Colors.grey, fontSize: 14),
+              ),
+            ),
+            SizedBox(height: 10),
+            Expanded(
+              child: ListView(
+                children: [
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    horizontalTitleGap: 5,
+                    titleAlignment: ListTileTitleAlignment.top,
+                    
+                    leading: Icon(
+                      Icons.location_on_outlined,
+                      color: Colors.grey,
+                      size: 30,
+                    ),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Soto Dan Pikul Temurun",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        SizedBox(height: 3),
+                        SizedBox(
+                          width: 300,
+                          child: Text(
+                            "Jalan Rinjani Utara No.11, Mojosongo, Jebres, Kota Surakarta (Solo), Jawa Tengah 57127, Indonesia",
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 11,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    trailing: Text(
+                      "0.0km",
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
+                    onTap: () {},
+                  ),
+                ],
               ),
             ),
           ],
