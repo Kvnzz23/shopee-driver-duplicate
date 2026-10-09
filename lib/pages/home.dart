@@ -1,5 +1,6 @@
 import 'package:duplicate_spd/pages/notifikasi.dart';
 import 'package:flutter/material.dart';
+import 'package:action_slider/action_slider.dart';
 
 import './pesanan_searah.dart';
 import './hub.dart';
@@ -162,55 +163,170 @@ class _HomePageState extends State<HomePage>
         controller: tabController,
         children: [
           Center(child: Text("INI HEATMAP")),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 250,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        "https://cdni.iconscout.com/illustration/premium/thumb/empty-state-2130362-1800926.png",
+          if (isStatusKerja)
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 200,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          "https://cdni.iconscout.com/illustration/premium/thumb/empty-state-2130362-1800926.png",
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Text(
-                  "Belum Ada Pesanan",
-                  style: TextStyle(color: Colors.grey, fontSize: 18),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  "Pastikan selalu memakai atribut resmi dan\nlengkap saat menjalankan pesanan, ya!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
-                ),
-                SizedBox(height: 8),
-                ElevatedButton(
-                  onPressed: () {
-                    tabController.animateTo(0);
-                  },
-                  child: Text(
-                    "Cek Heatmap",
-                    style: TextStyle(color: Colors.black54),
+                  Text(
+                    "Belum Ada Pesanan",
+                    style: TextStyle(color: Colors.grey, fontSize: 18),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    elevation: 0,
-                    side: BorderSide(color: Colors.grey, width: 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3),
+                  SizedBox(height: 8),
+                  Text(
+                    "Pastikan selalu memakai atribut resmi dan\nlengkap saat menjalankan pesanan, ya!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey, fontSize: 13),
+                  ),
+                  SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {
+                      tabController.animateTo(0);
+                    },
+                    child: Text(
+                      "Cek Heatmap",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      elevation: 0,
+                      side: BorderSide(color: Colors.grey, width: 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          else
+            Column(
+              children: [
+                // Bagian konten yang akan rata tengah vertikal
+                Expanded(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SingleChildScrollView(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: constraints.maxHeight, // Memaksa tinggi minimal seluas sisa ruang
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical: 16.0,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .center, // Sekarang ini akan berfungsi
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    width: 200,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          "https://cdn-icons-png.flaticon.com/512/2830/2830305.png",
+                                        ),
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  const Text(
+                                    "Status kerja tidak aktif",
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  const Text(
+                                    "Sudah siap terima pesanan? Pastikan\nMenggunakan atribut resmi secara\nlengkap\nSiap onbid dan selesaikan pesanan yang\nmasuk tanpa diabaikan",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  const Text(
+                                    "Geser tombol Mulai Bekerja untuk\nmenerima pesanan\nJika tidak dapat menjalankan pesanan,\ncukup nonaktifkan 'Status Kerja' dan tidak\nperlu logout dari aplikasi.",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const Divider(
+                  height: 1,
+                  thickness: 1,
+                  color: Color(0xFFEEEEEE), // Warna abu-abu muda yang halus
+                ),
+                // Tombol di paling bawah
+                Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ActionSlider.standard(
+                      height: 55,
+                      sliderBehavior: SliderBehavior.move,
+                      rolling: false,
+                      backgroundColor: Colors.red,
+                      toggleColor: Colors.white,
+                      icon: const Icon(
+                        Icons.keyboard_arrow_right,
+                        color: Colors.red,
+                        size: 28,
+                      ),
+                      child: const Text(
+                        'Mulai Bekerja',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      action: (controller) async {
+                        controller.loading();
+                        await Future.delayed(const Duration(seconds: 1));
+                        setState(() {
+                          isStatusKerja = true;
+                        });
+                        controller.success();
+                      },
                     ),
                   ),
                 ),
               ],
             ),
-          ),
         ],
       ),
       drawer: Drawer(
