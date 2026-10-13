@@ -1,4 +1,5 @@
 import 'package:duplicate_spd/pages/notifikasi.dart';
+import 'package:duplicate_spd/pages/saldo_saya.dart';
 import 'package:flutter/material.dart';
 import 'package:action_slider/action_slider.dart';
 
@@ -459,6 +460,9 @@ class _HomePageState extends State<HomePage>
                       trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     ),
                     ListTile(
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => SaldoSaya()),
+                      ),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                       title: Text(
                         "Saldo Saya",
